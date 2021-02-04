@@ -1,0 +1,18 @@
+steps:
+# Install Node.js
+- task: NodeTool@0
+  inputs:
+    versionSpec: $(nodeVersion)
+  displayName: 'Install Node.js'
+
+# Install node modules.
+- script: |
+    npm install
+  displayName: 'NPM Install'
+
+# Runs the `test` script that I included in my package.json
+- task: Npm@1
+  inputs:
+    command: custom
+    customCommand: 'test'
+  displayName: Run Tests
